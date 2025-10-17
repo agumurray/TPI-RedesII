@@ -14,21 +14,6 @@ Cada práctica irá extendiendo y complementando este trabajo, siguiendo las con
 - **Bloque IPv4:** 140.222.16.0/21  
 - **Bloque IPv6:** 2001:fef8:df80::/48  
 
-## Estructura del repositorio
-
-Cada práctica se organizará en carpetas separadas, siguiendo la numeración de las consignas:
-
-```
-
-/practica1
-/practica2
-/practica3
-...
-
-```
-
-Cada carpeta contendrá la documentación, configuraciones, scripts y capturas correspondientes a esa práctica.
-
 ## Objetivo
 
 - Configurar y simular la topología de red asignada.  
