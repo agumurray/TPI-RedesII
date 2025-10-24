@@ -595,12 +595,26 @@ node n15 {
 	custom-config-id service:DHCP
 	custom-command DHCP
 	config {
-	files=('/etc/dhcp/dhcpd.conf', )
+	dirs=('/etc/dhcp', '/etc/default', '/var/lib/dhcp', )
+	files=('/etc/dhcp/dhcpd.conf', '/etc/dhcp/dhcpd6.conf', '/etc/default/isc-dhcp-server', )
+	cmdup=('touch /var/lib/dhcp/dhcpd.leases', 'dhcpd', 'touch /var/lib/dhcp/dhcpd6.leases', 'dhcpd -6  -cf /etc/dhcp/dhcpd6.conf', )
 	}
     }
     custom-config {
-	custom-config-id service:DHCP:/etc/dhcp/dhcpd.conf
-	custom-command /etc/dhcp/dhcpd.conf
+	custom-config-id service:DHCP:/etc/default/isc-dhcp-server
+	custom-command /etc/default/isc-dhcp-server
+	config {
+	DHCPDv6_CONF=/etc/dhcp/dhcpd6.conf
+	
+	DHCPDv6_PID=/var/run/dhcpd6.pid
+	
+	INTERFACESv6="eth2"
+	
+	}
+    }
+    custom-config {
+	custom-config-id service:DHCP:/etc/dhcp/dhcpd6.conf
+	custom-command /etc/dhcp/dhcpd6.conf
 	config {
 	
 	default-lease-time 600;
@@ -611,6 +625,15 @@ node n15 {
 	
 	    option dhcp6.name-servers 2001:4860:4860::8888, 2001:4860:4860::8844;
 	}
+	
+	
+	
+	}
+    }
+    custom-config {
+	custom-config-id service:DHCP:/etc/dhcp/dhcpd.conf
+	custom-command /etc/dhcp/dhcpd.conf
+	config {
 	
 	
 	
