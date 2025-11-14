@@ -574,10 +574,6 @@ node n15 {
     network-config {
 	hostname n15
 	!
-	interface eth2
-	 ip address 140.222.20.66/26
-	 ipv6 address 2001:fef8:df80:7::2/64
-	!
 	interface eth1
 	 ip address 140.222.22.34/30
 	!
@@ -614,24 +610,6 @@ node n15 {
 	ip route add default via 140.222.22.21
 	}
     }
-    interface-peer {eth2 n16}
-}
-
-node n16 {
-    type router
-    model host
-    network-config {
-	hostname n16
-	!
-	interface eth0
-	 ip address 140.222.20.65/26
-	 ipv6 address 2001:fef8:df80:7::1/64
-	!
-    }
-    canvas c1
-    iconcoords {995.0 986.0}
-    labelcoords {995.0 1018.0}
-    interface-peer {eth0 n15}
 }
 
 link l1 {
@@ -716,11 +694,6 @@ link l16 {
 
 link l17 {
     nodes {n7 n8}
-    bandwidth 0
-}
-
-link l18 {
-    nodes {n16 n15}
     bandwidth 0
 }
 
