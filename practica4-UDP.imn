@@ -416,8 +416,8 @@ node n8 {
 	!
     }
     canvas c1
-    iconcoords {1437.0 549.0}
-    labelcoords {1437.0 581.0}
+    iconcoords {1439.0 549.0}
+    labelcoords {1439.0 581.0}
     interface-peer {eth0 n9}
     interface-peer {eth1 n14}
     services {IPForward StaticRoute}
@@ -464,49 +464,37 @@ node n9 {
 	!
     }
     canvas c1
-    iconcoords {1664.0 551.0}
-    labelcoords {1664.0 583.0}
+    iconcoords {1710.0 547.0}
+    labelcoords {1710.0 579.0}
     interface-peer {eth0 n8}
     custom-config {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	dirs=('/etc', )
-	files=('UserDefined.sh', '/etc/inetd.conf', '/etc/bash.bashrc', )
-	cmdup=('./UserDefined.sh', )
+	dirs=('/home/redes/Desktop/TPI-RedesII/scripts', )
+	files=('UserDefined.sh', 'ServidorUDP.py', 'ServidorTCP.py', )
+	cmdup=('./UserDefined.sh', '/etc/init.d/openbsd-inetd restart', )
 	}
     }
     custom-config {
-	custom-config-id service:UserDefined:/etc/bash.bashrc
-	custom-command /etc/bash.bashrc
+	custom-config-id service:UserDefined:ServidorTCP.py
+	custom-command ServidorTCP.py
 	config {
-	file:///etc/bash.bashrc
+	file:///home/redes/Desktop/TPI-RedesII/scripts/ServidorTCP.py
 	}
     }
     custom-config {
-	custom-config-id service:UserDefined:/etc/inetd.conf
-	custom-command /etc/inetd.conf
+	custom-config-id service:UserDefined:ServidorUDP.py
+	custom-command ServidorUDP.py
 	config {
-	
-	echo    stream  tcp     nowait  root    internal
-	echo    dgram   udp     wait    root    internal
-	
+	file:///home/redes/Desktop/Redes2/COMPARTIDA/ServidorUDP.py
 	}
     }
     custom-config {
 	custom-config-id service:UserDefined:UserDefined.sh
 	custom-command UserDefined.sh
 	config {
-	
-	#touch /etc/inetd.conf
-	
-	#echo "echo    stream  tcp     nowait  root    internal" >> /etc/inetd.conf
-	#echo "echo    dgram   udp     wait    root    internal" >> /etc/inetd.conf
-	
-	#systemctl restart openbsd-inetd 2>/dev/null || service inetd restart 2>/dev/null || /etc/init.d/openbsd-inetd restart 2>/dev/null
-	
-	/etc/init.d/openbsd-inetd restart 2>/dev/null
-	#service inetd restart 2>/dev/null
+	file:///home/redes/Desktop/TPI-RedesII/scripts/ServidorUDP.py
 	}
     }
     services {DefaultRoute DHCP SSH UserDefined}
@@ -557,10 +545,25 @@ node n11 {
 	!
     }
     canvas c1
-    iconcoords {313.0 302.0}
-    labelcoords {313.0 334.0}
+    iconcoords {314.0 302.0}
+    labelcoords {314.0 334.0}
     interface-peer {eth0 n12}
-    services {DefaultRoute SSH}
+    services {DefaultRoute SSH UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/home/redes/Desktop/TPI-RedesII/scripts', )
+	files=('ClienteUDP.py', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:ClienteUDP.py
+	custom-command ClienteUDP.py
+	config {
+	file:///home/redes/Desktop/TPI-RedesII/scripts/ClienteUDP.py
+	}
+    }
 }
 
 node n12 {
@@ -589,9 +592,32 @@ node n13 {
 	!
     }
     canvas c1
-    iconcoords {309.0 508.0}
-    labelcoords {309.0 540.0}
+    iconcoords {311.0 510.0}
+    labelcoords {311.0 542.0}
     interface-peer {eth0 n12}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	dirs=('/home/redes/Desktop/TPI-RedesII/scripts', )
+	files=('ClienteUDP.py', 'ClienteTCP.py', )
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:ClienteTCP.py
+	custom-command ClienteTCP.py
+	config {
+	file:///home/redes/Desktop/TPI-RedesII/scripts/ClienteTCP.py
+	}
+    }
+    custom-config {
+	custom-config-id service:UserDefined:ClienteUDP.py
+	custom-command ClienteUDP.py
+	config {
+	file:///home/redes/Desktop/TPI-RedesII/scripts/ClienteUDP.py
+	}
+    }
+    services {DefaultRoute SSH UserDefined}
 }
 
 node n14 {
@@ -768,7 +794,7 @@ link l18 {
 }
 
 annotation a1 {
-    iconcoords {187 204 772 921}
+    iconcoords {181 193 770 920}
     type rectangle
     label {RED A}
     labelcolor black
@@ -783,7 +809,7 @@ annotation a1 {
 }
 
 annotation a2 {
-    iconcoords {784 256 1193 687}
+    iconcoords {786 245 1199 686}
     type rectangle
     label {RED B}
     labelcolor black
@@ -798,7 +824,7 @@ annotation a2 {
 }
 
 annotation a3 {
-    iconcoords {1213.0 284.0 1729.0 894.0}
+    iconcoords {1335 266 1855 886}
     type rectangle
     label {RED C}
     labelcolor black
